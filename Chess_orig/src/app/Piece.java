@@ -30,61 +30,25 @@ public abstract class Piece {
 	protected boolean isPathClear(Board b, int from_x, int from_y, int to_x, int to_y) {
 		
 		int change_in_x = horizDistance(from_x, to_x);
-		int change_in_x_abs = Math.abs(change_in_x);
 		int change_in_y = vertDistance(from_y, to_y);
-		int change_in_y_abs = Math.abs(change_in_y);
 		int next_x = from_x;
 		int next_y = from_y;
 		
-		if (change_in_x == 0 && change_in_y != 0 ) {
-			while (change_in_y_abs > 0) {
-				if (change_in_y > 0) {
-					next_y += 1;
-				} else if (change_in_y < 0) {
-					next_y -= 1;
-				}
-				if (next_x == to_x && next_y == to_y) {
-					return true;
-				} else if (b.getPiece(next_x, next_y) != null) {
-					return false;
-				} 
-				change_in_y_abs -= 1;
-			}
-		} else if (change_in_x != 0 && change_in_y == 0 ) {
-			while (change_in_x_abs > 0) {
-				if (change_in_x > 0) {
-					next_x += 1;
-				} else if (change_in_x < 0) {
-					next_x -= 1;
-				}
-				if (next_x == to_x && next_y == to_y) {
-					return true;
-				} else if (b.getPiece(next_x, next_y) != null) {
-					return false;
-				} 
-				change_in_x_abs -= 1;
-			}
-		} else if (change_in_x == change_in_y ) {
-			while (change_in_y_abs > 0) {
-				if (change_in_y > 0) {
-					next_y += 1;
-				} else if (change_in_y < 0) {
-					next_y -= 1;
-				}
-				if (change_in_x > 0) {
-					next_x += 1;
-				} else if (change_in_x < 0) {
-					next_x -= 1;
-				}
-				if (next_x == to_x && next_y == to_y) {
-					return true;
-				} else if (b.getPiece(next_x, next_y) != null) {
-					return false;
-				} 
-				change_in_y_abs -= 1;
-			}
+		if (change_in_x != 0) {
+			next_x += (1 * change_in_x) / Math.abs(change_in_x);
 		}
-		return true;
+		if (change_in_y != 0) {
+			next_y += (1 * change_in_y) / Math.abs(change_in_y);
+		}
+		
+		if (horizDistance(next_x, to_x) == 0
+			&& vertDistance(next_y, to_y) == 0) {
+			return true;
+		} else if (b.getPiece(next_x, next_y) != null) {
+			return false;
+		} else {
+			return isPathClear(b, next_x, next_y, to_x, to_y);
+		}
 	}
 	
 	protected int vertDistance(int from_y, int to_y) {
