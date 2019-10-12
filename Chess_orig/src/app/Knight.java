@@ -1,8 +1,6 @@
 package app;
 
 public class Knight extends Piece {
-	private final static boolean WHITE = true;
-	private final static boolean BLACK = false;
 	
 	public Knight(boolean _color) {
 		super(_color);

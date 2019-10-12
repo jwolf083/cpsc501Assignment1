@@ -1,8 +1,6 @@
 package app;
 
 public class Rook extends Piece {
-	private final static boolean WHITE = true;
-	private final static boolean BLACK = false;
 	
 	public Rook(boolean _color) {
 		super(_color);

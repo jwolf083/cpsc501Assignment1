@@ -2,8 +2,9 @@ package app;
 
 
 public abstract class Piece {
-	private final static boolean WHITE = true;
-	private final static boolean BLACK = false;
+	protected static final boolean WHITE = true;
+	protected static final boolean BLACK = false;
+	
 	private boolean color;
 	
 	protected Piece(boolean _color) {

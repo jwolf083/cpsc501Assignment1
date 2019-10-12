@@ -2,8 +2,6 @@ package app;
 
 
 public class Queen extends Piece {
-	private final static boolean WHITE = true;
-	private final static boolean BLACK = false;
 	
 	public Queen(boolean _color) {
 		super(_color);

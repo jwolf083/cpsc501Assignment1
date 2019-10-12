@@ -3,9 +3,6 @@ package app;
 
 public class King extends Piece {
 	
-	private final static boolean WHITE = true;
-	private final static boolean BLACK = false;
-	
 	public King(boolean _color) {
 		super(_color);
 	}

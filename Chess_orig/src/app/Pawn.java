@@ -2,8 +2,7 @@ package app;
 
 
 public class Pawn extends Piece {
-	private final static boolean WHITE = true;
-	private final static boolean BLACK = false;
+	
 	private boolean has_moved = false;
 	
 	public Pawn(boolean _color) {

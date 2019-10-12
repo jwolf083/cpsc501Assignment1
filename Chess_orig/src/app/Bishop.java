@@ -1,8 +1,6 @@
 package app;
 
 public class Bishop extends Piece {
-	private final static boolean WHITE = true;
-	private final static boolean BLACK = false;
 	
 	public Bishop(boolean _color) {
 		super(_color);
