@@ -36,18 +36,6 @@ public class Knight extends Piece {
 		}
 	}
 	
-	private boolean canTakeDestination(Board b, int to_x, int to_y) {
-		
-		Piece destination = b.getPiece(to_x, to_y);
-		
-		if (destination != null
-			&& destination.getColor() == super.getColor()) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
 	public boolean canMove(Board b, int from_x, int from_y, int to_x, int to_y) {
 	
 		
