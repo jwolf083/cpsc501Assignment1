@@ -14,18 +14,6 @@ public abstract class Piece {
 		return this.color;
 	}
 	
-	protected boolean isForward(int from_y, int to_y) {
-		
-		int change_in_y = vertDistance(from_y, to_y);
-		
-		if (this.color == WHITE && change_in_y < 0) {
-			return true;
-		} else if (this.color == BLACK && change_in_y > 0) {
-			return true;
-		} else {
-		return false;
-		}
-	}
 	
 	protected boolean isVertical(int from_x, int from_y, int to_x, int to_y) {
 		

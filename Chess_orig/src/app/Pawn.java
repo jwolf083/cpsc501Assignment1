@@ -37,9 +37,21 @@ public class Pawn extends Piece {
 		} else {
 			return false;
 		}
-		
 	}
-	
+		
+	private boolean isForward(int from_y, int to_y) {
+			
+		int change_in_y = vertDistance(from_y, to_y);
+		
+		if (super.getColor() == WHITE && change_in_y < 0) {
+			return true;
+		} else if (super.getColor() == BLACK && change_in_y > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
 	public boolean canMove(Board b, int from_x, int from_y, int to_x, int to_y) {
 		
 		Piece destination = b.getPiece(to_x, to_y); 
@@ -63,5 +75,6 @@ public class Pawn extends Piece {
 		}
 		return false;
 	}
+
 	
 }
