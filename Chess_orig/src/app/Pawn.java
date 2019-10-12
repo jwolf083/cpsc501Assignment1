@@ -27,32 +27,66 @@ public class Pawn extends Piece {
 		return symbol;
 	}
 	
-	public boolean canMove(Board b, int from_x, int from_y, int to_x, int to_y) {
+	protected boolean isVertical(int from_x, int from_y, int to_x, int to_y) {
+		
+		if (horizDistance(from_x, to_x) == 0
+			&& vertDistance(from_y, to_y) != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	protected boolean isDiagonal(int from_x, int from_y, int to_x, int to_y) {
+		
+		int change_in_x = horizDistance(from_x, to_x);
+		int change_in_y = vertDistance(from_y, to_y);
+		
+		change_in_x *= change_in_x;
+		change_in_y *= change_in_y;
+		if (change_in_x != 0 
+			&& change_in_x == change_in_y) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private boolean canTakeDestinationPawn(Board b, int to_x, int to_y) {
 		
 		Piece destination = b.getPiece(to_x, to_y);
-		int vert_distance = super.vertDistance(from_y, to_y);
-		int vert_distance_abs = Math.abs(vert_distance);
-		int horiz_distance_abs = Math.abs(super.horizDistance(from_x, to_x));
 		
-		if (super.isPathClear(b, from_x, from_y, to_x, to_y) 
-			&& ((super.getColor() == WHITE && vert_distance < 0)
-				|| super.getColor() == BLACK && vert_distance > 0)) {
-			if (horiz_distance_abs == 0
+		if (destination != null
+			&& destination.getColor() != super.getColor()) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public boolean canMove(Board b, int from_x, int from_y, int to_x, int to_y) {
+		
+		Piece destination = b.getPiece(to_x, to_y); 
+		int vert_distance = Math.abs(super.vertDistance(from_y, to_y));
+		
+		if (super.isPathClear(b, from_x, from_y, to_x, to_y)
+			&& isForward(from_y, to_y)) {
+			if (isVertical(from_x, from_y, to_x, to_y)
 				&& destination == null) {
-				if (vert_distance_abs == 1
-					|| (vert_distance_abs == 2 && !this.has_moved)) {
+				if (vert_distance == 1
+					|| (vert_distance == 2 && !this.has_moved)) {
 					this.has_moved = true;
 					return true;
 				}
-			} else if (horiz_distance_abs == vert_distance_abs
-					 && destination != null
-					 && destination.getColor() != super.getColor()
-					 && vert_distance_abs == 1) {
+			} else if (isDiagonal(from_x, from_y, to_x, to_y) 
+					   && canTakeDestinationPawn(b, to_x, to_y)
+					   && vert_distance == 1) {
 				this.has_moved = true;
 				return true;
 			}
 		}
-		return false;	
+		return false;
 	}
 	
 }
